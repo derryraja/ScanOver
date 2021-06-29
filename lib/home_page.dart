@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_over/Themes/app_color.dart';
+import 'package:scan_over/createqr_page.dart';
 import 'package:scan_over/scanner_page.dart';
 import 'package:lottie/lottie.dart';
 
@@ -64,7 +65,10 @@ class _HomePageState extends State<HomePage> {
               height: 30,
             ),
             GestureDetector(
-              // onTap: () => _openscanner(),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CreateQR()));
+              },
               child: Container(
                 width: double.infinity,
                 height: 50,
