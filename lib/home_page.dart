@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_over/Themes/app_color.dart';
 import 'package:scan_over/createqr_page.dart';
@@ -13,6 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String qrCode = 'Unknown';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               height: 100,
             ),
             GestureDetector(
-              onTap: () => _openscanner(),
+              onTap: () => scanQRCode(),
               child: Lottie.asset('assets/lf30_editor_undegko1.json',
                   height: 250, width: 250),
             ),
@@ -93,7 +96,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _openscanner() {
-    Navigator.push(context, MaterialPageRoute(builder: (c) => Scanner()));
+  Future<void> scanQRCode() async {
+    final qrCode = await FlutterBarcodeScanner.scanBarcode(
+        '#EA5F2D', 'Cancel', true, ScanMode.QR);
+
+    if (!mounted) return;
+
+    setState(() {
+      this.qrCode = qrCode;
+    });
   }
 }
