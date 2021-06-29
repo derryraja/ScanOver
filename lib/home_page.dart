@@ -50,7 +50,10 @@ class _HomePageState extends State<HomePage> {
               height: 100,
             ),
             GestureDetector(
-              onTap: () => scanQRCode(),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Scanner()));
+              },
               child: Lottie.asset('assets/lf30_editor_undegko1.json',
                   height: 250, width: 250),
             ),
