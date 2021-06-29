@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_over/Themes/app_color.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String qrCode = 'Unknown';
+  String _scanBarcode = 'Unknown';
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,12 @@ class _HomePageState extends State<HomePage> {
               height: 100,
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Scanner()));
-              },
+              onTap: () => scanQR(),
               child: Lottie.asset('assets/lf30_editor_undegko1.json',
                   height: 250, width: 250),
             ),
+            // Text('Scan result : $_scanBarcode\n',
+            //     style: TextStyle(fontSize: 20)),
             SizedBox(
               height: 120,
             ),
@@ -99,14 +99,24 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> scanQRCode() async {
-    final qrCode = await FlutterBarcodeScanner.scanBarcode(
-        '#EA5F2D', 'Cancel', true, ScanMode.QR);
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
 
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
-      this.qrCode = qrCode;
+      _scanBarcode = barcodeScanRes;
     });
   }
 }
