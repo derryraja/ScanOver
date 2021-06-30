@@ -108,14 +108,24 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute(builder: (context) => Scanner(scanBarcode)),
       );
+
+      if (!mounted) return;
+
+      setState(() {
+        scanBarcode = barcodeScanRes;
+      });
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Scanner(scanBarcode)),
+      );
+
+      if (!mounted) return;
+
+      setState(() {
+        scanBarcode = barcodeScanRes;
+      });
     }
-
-    if (!mounted) return;
-
-    setState(() {
-      scanBarcode = barcodeScanRes;
-    });
   }
 }
