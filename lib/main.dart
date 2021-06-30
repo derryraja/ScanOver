@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:scan_over/home_page.dart';
+import 'package:scan_over/scanner_page.dart';
 
 void main() {
   runApp(MaterialApp(
