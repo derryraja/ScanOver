@@ -47,7 +47,7 @@ class _ScannerState extends State<Scanner> {
               child: Column(
                 children: [
                   Center(
-                    child: Text('QR Code Scanned',
+                    child: Text('Code Scanned',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                           fontSize: 20,
