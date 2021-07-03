@@ -3,18 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scan_over/Themes/app_color.dart';
 import 'package:scan_over/home_page.dart';
 
-class Scanner extends StatefulWidget {
+class Scannerf extends StatefulWidget {
   //const Scanner({Key? key}) : super(key: key);
   String scanBarcode = 'Unknown';
-  Scanner(this.scanBarcode);
+  Scannerf(this.scanBarcode);
 
   @override
-  _ScannerState createState() => _ScannerState(this.scanBarcode);
+  _ScannerfState createState() => _ScannerfState(this.scanBarcode);
 }
 
-class _ScannerState extends State<Scanner> {
+class _ScannerfState extends State<Scannerf> {
   String scanBarcode = 'Unknown';
-  _ScannerState(this.scanBarcode);
+  _ScannerfState(this.scanBarcode);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _ScannerState extends State<Scanner> {
               child: Column(
                 children: [
                   Center(
-                    child: Text('Code Scanned',
+                    child: Text('Scan Failed',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                           fontSize: 20,
@@ -59,7 +59,7 @@ class _ScannerState extends State<Scanner> {
                     height: 30,
                   ),
                   Center(
-                    child: Text('Here are the scan results',
+                    child: Text('Scanning was aborted',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                           fontSize: 16,
@@ -71,7 +71,7 @@ class _ScannerState extends State<Scanner> {
                     height: 100,
                   ),
                   Image.asset(
-                    'assets/qr_scanned.png',
+                    'assets/qr_failed.png',
                     width: 250,
                     height: 250,
                   ),

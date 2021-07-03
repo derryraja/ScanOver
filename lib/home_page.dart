@@ -6,6 +6,7 @@ import 'package:scan_over/Themes/app_color.dart';
 import 'package:scan_over/createqr_page.dart';
 import 'package:scan_over/scanner_page.dart';
 import 'package:lottie/lottie.dart';
+import 'package:scan_over/scannerf_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Center(
               child: Text(
-                  'Tap the animation to open the camera and scan a QR code immediately',
+                  'Tap the animation to open the camera\nand scan QR codes',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                     fontSize: 16,
@@ -97,35 +98,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> scanQR() async {
+  void scanQR() async {
     String barcodeScanRes;
-
-    try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#EA5F2D', 'Cancel', true, ScanMode.QR);
+    barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+        '#EA5F2D', 'Cancel', true, ScanMode.QR);
+    if (barcodeScanRes == '-1') {
+      scanBarcode = 'Failed';
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Scannerf(scanBarcode)));
+    } else {
       scanBarcode = barcodeScanRes;
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Scanner(scanBarcode)),
-      );
-
-      if (!mounted) return;
-
-      setState(() {
-        scanBarcode = barcodeScanRes;
-      });
-    } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Scanner(scanBarcode)),
-      );
-
-      if (!mounted) return;
-
-      setState(() {
-        scanBarcode = barcodeScanRes;
-      });
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Scanner(scanBarcode)));
     }
   }
 }
