@@ -39,14 +39,14 @@ class _HomePageState extends State<HomePage> {
               height: 30,
             ),
             Center(
-              child: Text(
-                  'Tap the animation to open the camera\nand scan QR codes',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.montserrat(
-                    fontSize: 16,
-                    color: AppColor.klightGrey,
-                    fontWeight: FontWeight.normal,
-                  )),
+              child:
+                  Text('Tap the animation to open the camera and scan QR codes',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        color: AppColor.klightGrey,
+                        fontWeight: FontWeight.normal,
+                      )),
             ),
             SizedBox(
               height: 80,
