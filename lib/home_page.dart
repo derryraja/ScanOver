@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                   )),
             ),
             SizedBox(
-              height: 100,
+              height: 80,
             ),
             GestureDetector(
               onTap: () => scanQR(),
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   height: 250, width: 250),
             ),
             SizedBox(
-              height: 120,
+              height: 80,
             ),
             Text('or you can',
                 textAlign: TextAlign.center,
